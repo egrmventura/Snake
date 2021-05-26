@@ -19,13 +19,13 @@ class cube(object):
         self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
     
     def draw(self, surface, eyes=False):
-        dis = self.w // self.rows
+        dis = self.w # self.rows
         i = self.pos[0]
         j = self.pos[1]
 
         pygame.draw.rect(surface, self.color, (i*dis+1, j*dis+1, dis-2, dis-2))
         if eyes:
-            center = dis//2
+            center = dis#2
             radius = 3
             circleMiddle = (i*dis + center-radius, j*dis+8)
             circleMiddle2 = (i*dis + dis-radius*2, j* dis +8)
@@ -116,7 +116,7 @@ class snake(object):
 
 
 def drawGrid(w, rows, surface):
-	sizeBtwn = w // rows
+	sizeBtwn = w # rows
 
 	x = 0
 	y = 0
@@ -138,6 +138,8 @@ def redrawWindow(surface):
 
 def randomSnack(rows, item):
     positions = item.body
+    x = 0
+    y = 0
     while True:
         x = random.randrange(rows)
         y = random.randrange(rows)
@@ -145,6 +147,7 @@ def randomSnack(rows, item):
             continue
         else:
             break
+    return (x,y)
 def message_box(subject, content):
     root = tk.Tk()
     root.attrubutes("-topmost", True)
