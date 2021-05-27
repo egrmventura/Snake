@@ -19,13 +19,13 @@ class cube(object):
         self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
     
     def draw(self, surface, eyes=False):
-        dis = self.w # self.rows
+        dis = self.w // self.rows
         i = self.pos[0]
         j = self.pos[1]
 
         pygame.draw.rect(surface, self.color, (i*dis+1, j*dis+1, dis-2, dis-2))
         if eyes:
-            center = dis#2
+            center = dis // 2
             radius = 3
             circleMiddle = (i*dis + center-radius, j*dis+8)
             circleMiddle2 = (i*dis + dis-radius*2, j* dis +8)
@@ -116,7 +116,7 @@ class snake(object):
 
 
 def drawGrid(w, rows, surface):
-	sizeBtwn = w # rows
+	sizeBtwn = w // rows
 
 	x = 0
 	y = 0
@@ -128,12 +128,11 @@ def drawGrid(w, rows, surface):
 		pygame.draw.line(surface, (255,255,255), (0,y), (w,y))
 	
 
-def redrawWindow(surface):
-    global rows, width, s, snack
+def redrawWindow(surface, s, snack, width, rows):
     surface.fill((0,0,0))
     s.draw(surface)
     snack.draw(surface)
-    drawGrid(width, rows, surface)
+    drawGrid(30, 5, surface)
     pygame.display.update()
 
 def randomSnack(rows, item):
@@ -158,7 +157,6 @@ def message_box(subject, content):
     except:
         pass
 def main():
-    global width, rows, s, snack
     width = 500
     rows = 20
     win = pygame.display.set_mode((width, width))
@@ -181,7 +179,7 @@ def main():
                 s.reset((10,10))
                 break
         
-        redrawWindow(win)
+        redrawWindow(win, s, snack, width, rows)
 
 
 rows = 20
